@@ -11,7 +11,7 @@ import SwiftUI
 struct LOLBookApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            Tab()
         }
     }
 }
