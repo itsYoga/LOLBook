@@ -5,13 +5,6 @@
 //  Created by Jesse Liang on 2024/11/10.
 //
 
-//
-//  ChampionModel.swift
-//  LeaguePedia
-//
-//  Created by Ivan Voloshchuk on 03/01/22.
-//
-
 import Foundation
 
 // 定義版本型別，存儲版本字符串的陣列
@@ -30,14 +23,13 @@ struct Champion: Codable, Hashable {
 
 // Datum 結構，包含每個英雄的具體資料，符合 Codable 和 Hashable 協定
 struct Datum: Codable, Hashable {
-    // var version: String // 原本可以包含版本資料，但已被註解掉
     var id, key, name, title: String   // 英雄的 ID、鍵、名稱、標題
     var lore: String   // 英雄的背景故事
     var blurb: String  // 簡短介紹
     var allytips: [String]   // 同隊隊友提示
     var enemytips: [String]  // 敵方提示
     var info: Info     // 英雄的屬性資訊（攻擊、防禦、魔法、難度）
-    var image: Image   // 英雄的圖片資料
+    var image: ChampionImage   // 英雄的圖片資料
     var tags: [String] // 英雄的標籤（例如戰士、法師等）
     var spells: [Spell]  // 英雄的技能列表
     var passive: Passive  // 英雄的被動技能
@@ -55,7 +47,7 @@ struct Spell: Codable, Hashable {
     var cost: [Int]   // 技能的消耗（如法力消耗）
     var costBurn: String  // 技能消耗的文本格式
     var costType, maxammo: String  // 消耗類型（如法力、能量）和最大彈藥數量
-    var image: Image   // 技能的圖片資料
+    var image: ChampionImage   // 技能的圖片資料
     var resource: String?  // 資源類型（例如法力、能量等）
 
     // 定義 CodingKeys，將 JSON 鍵名稱映射到 Swift 屬性
@@ -72,13 +64,13 @@ struct Spell: Codable, Hashable {
 struct Passive: Codable, Hashable {
     var name: String   // 被動技能名稱
     var description: String   // 被動技能描述
-    var image: Image   // 被動技能的圖片資料
+    var image: ChampionImage   // 被動技能的圖片資料
 }
 
-// MARK: - Image
+// MARK: - ChampionImage
 
-// Image 結構，描述圖像的資料，包括檔案名稱、位置等
-struct Image: Codable, Hashable {
+// ChampionImage 結構，描述圖像的資料，包括檔案名稱、位置等
+struct ChampionImage: Codable, Hashable {
     var full: String  // 完整圖片檔案名稱
     var sprite: String  // 圖片所在的 sprite 檔案名稱
     var group: String  // 圖片組別

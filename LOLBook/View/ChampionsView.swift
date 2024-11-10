@@ -9,6 +9,7 @@
 import SwiftUI
 
 // 主視圖，展示英雄列表
+
 struct ChampionsView: View {
     @ObservedObject var champFetcher: ChampionFetcher  // 管理資料的類別
 
@@ -20,7 +21,11 @@ struct ChampionsView: View {
         NavigationView {
             VStack {
                 if champFetcher.isChampLoading {
-                    ProgressView()  // 資料加載中顯示旋轉圖示
+                    Text("Loading...")  // 資料加載中文字樣
+                        .padding()
+                        .background(Color.gray.opacity(0.2))
+                        .cornerRadius(8)
+                        .shadow(radius: 5)  // 增加陰影效果
                 } else if champFetcher.errorMessage != nil {
                     Text(champFetcher.errorMessage ?? "An error occurred")  // 顯示錯誤訊息
                 } else {
@@ -62,6 +67,7 @@ struct ChampListRow: View {
                     image.resizable()
                         .clipped()
                         .frame(width: 80, height: 80)
+                        .shadow(radius: 5)  // 增加陰影效果
                 } else if phase.error != nil {
                     Text("?")  // 若圖片載入失敗顯示問號
                         .font(.system(size: 40))
@@ -69,8 +75,11 @@ struct ChampListRow: View {
                         .frame(width: 80, height: 80)
                         .background(Color.red.opacity(0.6))
                 } else {
-                    ProgressView()  // 載入中的旋轉圖示
+                    Text("Loading...")  // 資料加載中文字樣
                         .frame(width: 80, height: 80)
+                        .background(Color.gray.opacity(0.3))
+                        .cornerRadius(10)
+                        .shadow(radius: 5)  // 增加陰影效果
                 }
             }
 
