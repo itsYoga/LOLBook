@@ -1,10 +1,3 @@
-//
-//  Untitled.swift
-//  LOLBook
-//
-//  Created by Jesse Liang on 2024/11/10.
-//
-
 import SwiftUI
 import WebKit
 
@@ -38,10 +31,19 @@ struct MusicVideoView: View {
 
 // 主頁面，包含 Champions, Runes, 和 Music 分頁
 struct Tab: View {
-    // 設定 TabBar 的外觀
+    // 設定 TabBar 和 NavigationBar 的外觀
     init() {
+        // TabBar 設定
         UITabBar.appearance().isTranslucent = true // 設定為半透明
-        UITabBar.appearance().barTintColor = UIColor(named: "cardColor") // 設定 TabBar 背景顏色
+        let barColor = isDarkMode ? UIColor.black : UIColor(named: "cardColor")!
+        UITabBar.appearance().barTintColor = barColor // 根據深色模式切換背景顏色
+        
+        // NavigationBar 設定
+        let appearance = UINavigationBar.appearance()
+        appearance.barTintColor = isDarkMode ? UIColor.black : UIColor.white
+        appearance.titleTextAttributes = [
+            .foregroundColor: isDarkMode ? UIColor.white : UIColor.black
+        ]
     }
 
     @State private var selection = "Champions" // 記錄當前選中的分頁，默認為 "Champions"

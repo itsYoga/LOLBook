@@ -1,11 +1,3 @@
-//
-//  RunesView.swift
-//  LOLBook
-//
-//  Created by Jesse Liang on 2024/11/10.
-//
-
-
 import SwiftUI
 
 // 每個主要符文的描述文字，用於顯示於列表中
@@ -43,8 +35,10 @@ struct RunesView: View {
                 .onAppear {
                     runeFetcher.loadRunesData() // 當頁面顯示時載入符文資料
                 }
+                .background(Color(UIColor.systemBackground)) // 背景顏色支援黑暗模式
             }
         }
+        .preferredColorScheme(.dark) // 預覽時強制使用黑暗模式（可選）
     }
 }
 
@@ -59,13 +53,13 @@ struct RuneListRow: View {
             ZStack {
                 Rectangle()
                     .cornerRadius(30)
-                    .foregroundColor(Color("cardColor"))
+                    .foregroundColor(Color("cardColor")) // 自定義顏色，支持黑暗模式
 
                 HStack {
                     ZStack {
                         Rectangle()
                             .cornerRadius(20)
-                            .foregroundColor(Color("innerCard"))
+                            .foregroundColor(Color("innerCard")) // 自定義顏色，支持黑暗模式
                         SwiftUI.Image(imageName[index])
                             .resizable()
                             .frame(width: 35, height: 35)
@@ -74,11 +68,11 @@ struct RuneListRow: View {
 
                     VStack(alignment: .leading) {
                         Text(runeFetcher.runesList[index].name)
-                            .foregroundColor(.primary)
+                            .foregroundColor(.primary) // 自動適應黑暗模式
                             .font(.system(size: 20))
                             .fontWeight(.bold)
                         Text(keystoneDescription[index])
-                            .foregroundColor(.secondary)
+                            .foregroundColor(.secondary) // 自動適應黑暗模式
                             .font(.system(size: 15))
                             .multilineTextAlignment(.leading)
                     }
@@ -87,8 +81,7 @@ struct RuneListRow: View {
                     Spacer()
 
                     Text(">")
-                        .foregroundColor(.secondary)
-                    
+                        .foregroundColor(.secondary) // 自動適應黑暗模式
                     Spacer()
                 }
                 .padding(.leading, 20)
@@ -103,11 +96,13 @@ struct RuneListRow: View {
         }
     }
 }
+
 // MARK: - PREVIEW
 
 // 預覽 RunesView，方便檢視設計和功能
 struct RunesView_Previews: PreviewProvider {
     static var previews: some View {
         RunesView()
+            .preferredColorScheme(.dark) // 強制使用黑暗模式顯示
     }
 }
